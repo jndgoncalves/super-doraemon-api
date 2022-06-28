@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { entities } from 'src/typeorm';
+import { entities } from 'src/utils/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       entities: entities,
     }),
-    AuthModule
+    AuthModule,
+    UserModule
   ],
   controllers: [],
   providers: [],
