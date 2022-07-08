@@ -25,6 +25,7 @@ async function bootstrap() {
   /* const sessionRepository = getRepository(Session); */
   const sessionRepository = dataSource.getRepository(Session);
 
+  /* Prefix every route with /api */
   app.setGlobalPrefix('api');
 
 
