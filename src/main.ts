@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as session from 'express-session';
-import { DataSource, getRepository, Repository } from 'typeorm';
+import * as passport from 'passport';
+import { DataSource } from 'typeorm';
 import { Session } from './utils/typeorm/entities/Session';
 import { TypeormStore } from 'connect-typeorm/out';
 import { entities } from 'src/utils/typeorm';
@@ -39,6 +40,9 @@ async function bootstrap() {
       store: new TypeormStore().connect(sessionRepository),
     }),
   );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   try {
     await app.listen(process.env.PORT);

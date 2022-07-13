@@ -4,6 +4,7 @@ import { SERVICES } from 'src/utils/constants';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { DiscordStrategy } from './utils/DiscordStrategy';
+import { SessionSerializer } from './utils/SessionSerializer';
 
 @Module({
   imports: [UserModule],
@@ -11,6 +12,7 @@ import { DiscordStrategy } from './utils/DiscordStrategy';
   providers: [
     /* if you just add the class instead of using the token, you wouldn't be able to program down to the interface */
     DiscordStrategy,
+    SessionSerializer,
     {
       provide: SERVICES.AUTH,
       useClass: AuthService,
