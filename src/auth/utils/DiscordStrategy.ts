@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import Strategy, { Profile } from 'passport-discord';
+import { Strategy, Profile } from 'passport-discord';
 import { SERVICES } from 'src/utils/constants';
 import { IAuthService } from '../interfaces/auth';
 
@@ -15,14 +15,16 @@ export class DiscordStrategy extends PassportStrategy(Strategy) {
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
       callbackURL: process.env.DISCORD_CALLBACK_URL,
       /* Passport generates que correct URL for the user to login */
-      scope: ['identity', 'email', 'guilds'],
+      scope: ['identify', 'email', 'guilds'],
     });
   }
 
   /* Validate is invoked when user click authorize on discord platform */
   async validate(acessToken: string, refreshToken: string, profile: Profile) {
-    console.log('DiscordStrategy Validate Method');
-    console.log(profile.username);
+    console.log(
+      profile.username,
+      ' Username at DiscordStrategy Validate Method',
+    );
     return this.authService.validateUser({ discordId: profile.id });
   }
 }

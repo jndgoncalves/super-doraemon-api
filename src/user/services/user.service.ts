@@ -14,13 +14,13 @@ export class UserService implements IUserService {
   ) {}
 
   createUser(details: UserDetails) {
-    console.log('createUser');
+    console.log('user.service - create User');
     const newUser = this.userRepository.create(details);
     return this.userRepository.save(newUser);
   }
 
   findUser(discordId: string) {
-    console.log('findUser');
+    console.log('user.service - find User');
     return this.userRepository.findOneBy({ discordId });
   }
 }
