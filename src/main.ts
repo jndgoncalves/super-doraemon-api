@@ -28,22 +28,21 @@ async function bootstrap() {
   /* Prefix every route with /api */
   app.setGlobalPrefix('api');
 
-
-  app.use(session({
-    secret: process.env.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 6000 * 60 * 24,
-    },
-    store: new TypeormStore().connect(sessionRepository),
-  }))
+  app.use(
+    session({
+      secret: process.env.COOKIE_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 6000 * 60 * 24,
+      },
+      store: new TypeormStore().connect(sessionRepository),
+    }),
+  );
 
   try {
     await app.listen(process.env.PORT);
     console.log(`Running on port ${process.env.PORT}!`);
-  } catch (error) {
-
-  }
+  } catch (error) {}
 }
 bootstrap();

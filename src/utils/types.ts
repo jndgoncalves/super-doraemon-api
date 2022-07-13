@@ -1,3 +1,3 @@
 export type UserDetails = {
-    discordId: string;
+  discordId: string;
 };

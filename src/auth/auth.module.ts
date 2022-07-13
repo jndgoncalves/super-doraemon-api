@@ -8,10 +8,11 @@ import { AuthService } from './services/auth.service';
   imports: [UserModule],
   controllers: [AuthController],
   providers: [
+    /* if you just add the class instead of using the token, you wouldn't be able to program down to the interface */
     {
       provide: SERVICES.AUTH,
       useClass: AuthService,
-    }
-  ]
+    },
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -21,11 +21,9 @@ import { UserModule } from './user/user.module';
       entities: entities,
     }),
     AuthModule,
-    UserModule
+    UserModule,
   ],
   controllers: [],
   providers: [],
 })
-
-export class AppModule { }
-
+export class AppModule {}
