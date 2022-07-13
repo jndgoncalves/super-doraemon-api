@@ -7,6 +7,6 @@ export class User {
     id: number;
 
     @Column({ unique: true, name: 'discord_id' })
-    discordId: String;
+    discordId: string;
 
 }

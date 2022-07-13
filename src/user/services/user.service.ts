@@ -16,7 +16,8 @@ export class UserService implements IUserService {
         console.log("createUser");
     }
 
-    findUser() {
+    findUser(discordId: string) {
         console.log("findUser");
+        return this.userRepository.findOne({ discordId });
     }
 }
