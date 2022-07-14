@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 /* Invoke passport */
@@ -9,5 +9,12 @@ export class DiscordAuthGuard extends AuthGuard('discord') {
     const request = context.switchToHttp().getRequest();
     await super.logIn(request);
     return activate;
+  }
+}
+
+export class AuthenticatedGuard implements CanActivate {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    return request.isAuthenticated();
   }
 }

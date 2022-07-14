@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { ROUTES } from 'src/utils/constants';
-import { DiscordAuthGuard } from '../utils/Guards';
+import { AuthenticatedGuard, DiscordAuthGuard } from '../utils/Guards';
 
 @Controller(ROUTES.AUTH)
 export class AuthController {
@@ -12,10 +12,17 @@ export class AuthController {
 
   @Get('redirect')
   @UseGuards(DiscordAuthGuard)
-  redirect() {}
+  redirect(@Res() res: Response) {
+    res.redirect('http://localhost:3000/menu');
+  }
 
   @Get('status')
-  status() {}
+  @UseGuards(AuthenticatedGuard)
+  status() {
+    return {
+      message: 'Authenticated',
+    };
+  }
 
   @Post('logout')
   logout() {}

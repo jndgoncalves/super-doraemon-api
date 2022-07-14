@@ -1,11 +1,14 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import { DataSource } from 'typeorm';
-import { Session } from './utils/typeorm/entities/Session';
 import { TypeormStore } from 'connect-typeorm/out';
+
 import { entities } from 'src/utils/typeorm';
+import { Session } from 'src/utils/typeorm/entities/Session';
+/* import { Session } from './utils/typeorm/entities/Session'; */
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -40,6 +43,11 @@ async function bootstrap() {
       store: new TypeormStore().connect(sessionRepository),
     }),
   );
+
+  app.enableCors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  });
 
   app.use(passport.initialize());
   app.use(passport.session());
