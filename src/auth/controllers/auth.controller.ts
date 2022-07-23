@@ -12,8 +12,7 @@ export class AuthController {
 
   @Get('redirect')
   @UseGuards(DiscordAuthGuard)
-  redirect(@Res() res: Response) {
-    res.redirect('http://localhost:3000/menu');
+  redirect() {
   }
 
   @Get('status')
